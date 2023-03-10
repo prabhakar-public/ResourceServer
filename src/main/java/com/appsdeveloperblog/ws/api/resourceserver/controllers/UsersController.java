@@ -20,6 +20,12 @@ public class UsersController {
     @Autowired
     Environment env;
 
+	@GetMapping("/login")
+	@PermitAll
+	public String login() {
+		return getReturnString("anonynous allowed login");
+	}
+
 	@GetMapping("/status/checkFree")
 	@PermitAll
 	public String freeStatus() {

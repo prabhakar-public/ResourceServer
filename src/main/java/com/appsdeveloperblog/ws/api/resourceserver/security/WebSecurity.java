@@ -7,12 +7,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
-@Configuration
-@EnableGlobalMethodSecurity(
-        securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true)
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+//@Configuration
+//@EnableGlobalMethodSecurity(
+//        securedEnabled = true,
+//        jsr250Enabled = true,
+//        prePostEnabled = true)
+//public class WebSecurity extends WebSecurityConfigurerAdapter {
+public class WebSecurity {
 
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
@@ -29,7 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 //                .withUser("admin2").password(encoder.encode("password")).roles("USER");
 //    }
 
-    @Override
+//    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
