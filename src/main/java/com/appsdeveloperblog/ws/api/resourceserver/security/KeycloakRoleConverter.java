@@ -1,4 +1,4 @@
-package com.appsdeveloperblog.ws.api.ResourceServer.security;
+package com.appsdeveloperblog.ws.api.resourceserver.security;
 
 import java.util.ArrayList;
 import java.util.Collection;

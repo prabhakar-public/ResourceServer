@@ -1,9 +1,9 @@
-package com.appsdeveloperblog.ws.api.ResourceServer.controllers;
+package com.appsdeveloperblog.ws.api.resourceserver.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -14,37 +14,45 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UsersController {
 
     @Autowired
     Environment env;
 
-	@GetMapping("/status/check")
-	public String status() {
-		return getReturnString("status check");
+	@GetMapping("/status/checkFree")
+	@PermitAll
+	public String freeStatus() {
+		return getReturnString("status check free");
 	}
 
-	@GetMapping("/status/check2")
+	@GetMapping("/status/checkBasic")
+	public String statusBasic() {
+		return getReturnString("status check basic");
+	}
+
+	@GetMapping("/status/checkDev")
 	@Secured("ROLE_developer")
+	public String status() {
+		return getReturnString("status check developer");
+	}
+
+	@GetMapping("/status/checkDev2")
+	@Secured("ROLE_developer2")
 	public String status2() {
-		return getReturnString("status check2");
+		return getReturnString("status check developer2");
 	}
 
 
 	@GetMapping("/status/checkAnon")
 	@Secured("ROLE_ANONYMOUS")
 	public String anonStatus() {
-		return getReturnString("anon status check");
+		return getReturnString("status check anonymous");
 	}
 
-	@GetMapping("/status/checkFree")
-	@PermitAll
-	public String freeStatus() {
-		return getReturnString("free status check");
-	}
 
 	private String getReturnString(String prefix) {
-		System.out.println(prefix + " called");
+		log.info(prefix + " called");
 		return prefix + " Working... at time = " + LocalDateTime.now();
 	}
 
@@ -56,6 +64,11 @@ public class UsersController {
         return "Deleted user with id " + id + " and JWT subject " + jwt.getSubject();
     }
 
+	@GetMapping("/status/getToken")
+	public Jwt getToken(@AuthenticationPrincipal Jwt jwt) {
+		log.info("token called");
+		return jwt;
+	}
 
 //    @PostAuthorize("returnObject.userId == #jwt.subject")
 //    @GetMapping(path = "/{id}")
