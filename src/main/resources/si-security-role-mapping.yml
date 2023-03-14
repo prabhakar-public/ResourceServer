@@ -1,0 +1,12 @@
+# File for mapping si-internal-roles with roles coming from auth provider external-roles aka
+# This file is expected to be different for each client and possibly vary across a client's environment
+# This file is going to be common across all si modules for a client. So it will be in the client-<state> top level directory.
+# Since there is potential for multiple ADs or auth providers (internal vs. external users), the values are a list,
+#  and we expect the list to have one entry per auth provider. It may be prudent to keep the external names different
+#  across the different auth providers
+
+# key is the GWT SI internal role. values are list of different external auth server provided roles
+#  list is needed in case we support multiple ID providers, and they have different role configurations
+gwt_int_si_prv_read:  kc-sip-nj-dev-prv-read,aad-sip-nj-dev-prv-read
+gwt_int_si_prv_write: kc-sip-nj-dev-prv-write,aad-sip-nj-dev-prv-write
+gwt_int_si_prv_admin: kc-sip-nj-dev-prv-admin,aad-sip-nj-dev-prv-admin
